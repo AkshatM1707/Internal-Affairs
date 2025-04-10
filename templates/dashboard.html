@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .dashboard {
+      background-color: rgba(0,0,0,0.2);
+      padding: 30px;
+      border-radius: 20px;
+      margin-top: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .flag-toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #222;
+      color: #00ff90;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-family: monospace;
+      box-shadow: 0 0 15px rgba(0,255,144,0.4);
+      animation: slideIn 0.8s ease;
+      z-index: 10;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .logout-btn, .theme-toggle {
+      position: absolute;
+      top: 20px;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .logout-btn {
+      right: 20px;
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .theme-toggle {
+      left: 20px;
+      background-color: #3498db;
+      color: white;
+    }
+
+    table {
+      margin: 30px auto 0;
+      width: 80%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      color: white;
+    }
+
+    th {
+      background-color: #111;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+  </style>
+</head>
+<body>
+  <div class="flag-toast">
+    🎉 Flag: {{ flag }}
+  </div>
+
+  <div class="login-container dashboard">
+    <button class="logout-btn" onclick="window.location='/logout'">Logout</button>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+    <h3>🎉 Login successful, {{ username }}!</h3>
+<p>🔑 Here is your access key: <strong>{{ key }}</strong></p>
+<p>Go to <a href="{{ url_for('unlock') }}">/unlock</a> to use it!</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Join Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.joined }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("light-theme");
+    }
+  </script>
+</body>
+</html>

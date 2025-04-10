@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔓 Unlock Flag</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="login-container">
+    <h2>🔓 Unlock the Flag</h2>
+
+    <form method="POST">
+      <label for="key">Enter your key:</label>
+      <input type="text" name="key" placeholder="recover-xxxx" required>
+      <button type="submit">Unlock</button>
+    </form>
+
+    {% if flag %}
+      <p class="flag">🎉 Your flag: <strong>{{ flag }}</strong></p>
+    {% endif %}
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
