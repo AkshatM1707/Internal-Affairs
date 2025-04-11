@@ -83,7 +83,7 @@ def unlock():
     if request.method == 'POST':
         entered_key = request.form.get('key')
         if entered_key == "recover-8491":
-            flag = "flag{classic_sqli_ftw}"
+            flag = get_flag(entered_key)
         else:
             error = "❌ Invalid key. Try again!"
 

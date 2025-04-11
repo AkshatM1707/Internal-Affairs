@@ -1,3 +1,3 @@
 # helpers.py
 def get_flag(username):
-    return "flag{classic_sqli_ftw}"
+    return "HTB{sql_injection_1s_fun}"
